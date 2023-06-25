@@ -1,0 +1,45 @@
+import xml.etree.ElementTree as ET
+import json
+
+# XML Parser
+def parse_xml(xml_data):
+    root = ET.fromstring(xml_data)
+    parsed_data = {}
+
+    for child in root:
+        parsed_data[child.tag] = child.text
+
+    return parsed_data
+
+# JSON Parser
+def parse_json(json_data):
+    parsed_data = json.loads(json_data)
+    return parsed_data
+
+# Example usage
+xml_string = '''
+<root>
+    <name>John Doe</name>
+    <age>30</age>
+    <city>New York</city>
+</root>
+'''
+
+json_string = '''
+{
+    "name": "John Doe",
+    "age": 30,
+    "city": "New York"
+}
+'''
+
+parsed_xml = parse_xml(xml_string)
+parsed_json = parse_json(json_string)
+
+print("Parsed XML data:")
+for key, value in parsed_xml.items():
+    print(key + ":", value)
+
+print("\nParsed JSON data:")
+for key, value in parsed_json.items():
+    print(key + ":", value)
